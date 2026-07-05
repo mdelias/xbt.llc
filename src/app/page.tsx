@@ -8,30 +8,30 @@ export default function Home() {
         <div className="absolute inset-0">
           <AsciiHero />
         </div>
-        {/* backdrop that gives text a clean reading surface over the ASCII */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-[5] mx-auto h-72 max-w-xl bg-gradient-to-b from-[var(--background)] via-[var(--background)]/60 to-transparent sm:h-80" />
+        {/* solid backdrop behind text for readability over ASCII */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-[5] mx-auto h-80 w-full max-w-2xl rounded-b-3xl bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a]/90 to-[#0a0a0a]/0" />
         <div className="relative z-10">
-          <h1 className="text-4xl font-semibold tracking-tight text-[var(--foreground)] sm:text-5xl">
+          <h1 className="text-4xl font-bold tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] sm:text-5xl">
             Law built for{' '}
-            <span className="bg-gradient-to-r from-[var(--accent-light)] to-[var(--accent)] bg-clip-text font-bold text-transparent">
+            <span className="bg-gradient-to-br from-[#7fc1ff] via-[#4a9eff] to-[#2a6a9c] bg-clip-text font-extrabold text-transparent drop-shadow-[0_1px_4px_rgba(0,100,200,0.5)]">
               digital assets
             </span>
           </h1>
-          <p className="mt-4 max-w-lg text-sm leading-relaxed text-[var(--muted)] sm:text-base">
+          <p className="mt-5 max-w-lg text-sm leading-relaxed text-[#bbb] drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)] sm:text-base">
             Regulatory strategy, corporate formation, securities compliance, and
             litigation defense at the intersection of law and blockchain
             technology.
           </p>
-          <div className="mt-8 flex gap-3">
+          <div className="mt-10 flex justify-center gap-4">
             <a
               href="/contact"
-              className="rounded bg-[var(--accent)] px-5 py-2.5 text-xs font-semibold text-white shadow-sm shadow-[var(--accent)]/30 transition-all hover:brightness-110"
+              className="rounded-lg bg-[#3a8acc] px-6 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-[#3a8acc]/30 transition-all hover:brightness-110 hover:shadow-xl hover:shadow-[#3a8acc]/40 active:scale-[0.97]"
             >
               Schedule a consultation
             </a>
             <a
               href="/services"
-              className="rounded border border-[var(--border)] px-5 py-2.5 text-xs font-medium text-[var(--muted)] transition-colors hover:border-[var(--subtle)] hover:text-[var(--foreground)]"
+              className="rounded-lg border border-[#333] bg-[#111]/80 px-6 py-3 text-xs font-bold uppercase tracking-wider text-[#999] shadow-lg backdrop-blur-sm transition-all hover:border-[#555] hover:text-white active:scale-[0.97]"
             >
               View services
             </a>
