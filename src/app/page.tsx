@@ -8,8 +8,8 @@ export default function Home() {
         <div className="absolute inset-0">
           <AsciiHero />
         </div>
-        {/* solid backdrop behind text for readability over ASCII */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-[5] mx-auto h-80 w-full max-w-2xl rounded-b-3xl bg-gradient-to-b from-[#050508] via-[#050508]/95 to-[#050508]/0" />
+        {/* narrow backdrop behind the text only — no longer covers the full top */}
+        <div className="pointer-events-none absolute left-1/2 top-1/2 z-[5] h-56 w-[90vw] max-w-xl -translate-x-1/2 -translate-y-1/2 rounded-3xl bg-[#050508]/90 shadow-[0_0_80px_40px_#050508]" />
         <div className="relative z-10">
           <h1 className="text-4xl font-bold tracking-tight text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] sm:text-5xl">
             Law built for{' '}

@@ -78,6 +78,29 @@ const dataSpecs: { col: number; speed: number; len: number }[] = [
   { col: 75, speed: 4.2, len: 14 },
 ];
 
+// Bitcoin genesis block hex dump — each row: byte-offset | 16 hex bytes | ASCII right-panel
+const GENESIS_LINES = [
+  '00000000  01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................',
+  '00000010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................',
+  '00000020  00 00 00 00 3B A3 ED FD 7A 7B 12 B2 7A C7 2C 3E  ....;£íýz{.²zÇ,>',
+  '00000030  67 76 8F 61 7F C8 1B C3 88 8A 51 32 3A 9F B8 AA  gv.a.È.ÃˆŠQ2:Ÿ¸ª',
+  '00000040  4B 1E 5E 4A 29 AB 5F 49 FF FF 00 1D 1D AC 2B 7C  K.^J)«_Iÿÿ...¬+|',
+  '00000050  01 01 00 00 00 01 00 00 00 00 00 00 00 00 00 00  ................',
+  '00000060  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................',
+  '00000070  00 00 00 00 FF FF FF FF 4D 04 FF FF 00 1D 1D 08  ....ÿÿÿÿM.ÿÿ....',
+  '00000080  04 45 54 68 65 20 54 69 6D 65 73 20 30 33 2F 4A  .EThe Times 03/J',
+  '00000090  61 6E 2F 32 30 30 39 20 43 68 61 6E 63 65 6C 6C  an/2009 Chancel',
+  '000000A0  6F 72 20 6F 6E 20 62 72 69 6E 6B 20 6F 66 20 63  lor on brink of c',
+  '000000B0  68 61 6E 63 65 6C 6C 6F 72 20 66 6F 72 20 73 65  hancellor for se',
+  '000000C0  63 6F 6E 64 20 62 61 69 6C 6F 75 74 20 66 6F 72  cond bailout for',
+  '000000D0  20 62 61 6E 6B 73 FF FF FF FF 01 00 F2 05 2A 01   banksÿÿÿÿ..ò.*.',
+  '000000E0  00 00 00 43 41 04 67 8A FD B0 FE 55 48 27 19 67  ...CA.gŠý°þUH\'.g',
+  '000000F0  F1 A6 71 30 B7 10 5C D6 A8 28 E0 39 09 A6 79 62  ñ¦q0·.\\Ö¨(à9.¦yb',
+  '00000100  E0 EA 1F 61 DE B6 49 F6 BC 3F 4C EF 38 C4 F3 55  àê.aÞ¶Iö¼?Lï8ÄóU',
+  '00000110  04 E5 1E C1 12 DE 5C 38 4D F7 BA 0B 8D 57 8A 4C  .å.Á.Þ\\8M÷º..WŠL',
+  '00000120  70 2B 6B F1 1D 5F AC 00 00 00 00                 p+kñ._¬.....',
+];
+
 export function AsciiHero() {
   const ref = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
@@ -205,6 +228,40 @@ export function AsciiHero() {
         if (fade > 0.1) {
           ctx.fillStyle = `hsl(180, 40%, ${bright}%)`;
           ctx.fillText(wp.ch, ox + Math.floor(wp.c) * CW + CW / 2, oy + Math.floor(wp.r) * CH);
+        }
+      }
+
+      // L7: Bitcoin genesis block hex dump — scrolling ticker at bottom rows
+      const genesisRow = 22;
+      const genesisSpeed = 2.0;
+      const genesisOffset = Math.floor((t * genesisSpeed) % GENESIS_LINES.length);
+      // Show 2 genesis lines scrolling horizontally
+      for (let lineOff = 0; lineOff < 2; lineOff++) {
+        const lineIdx = (genesisOffset + lineOff) % GENESIS_LINES.length;
+        const line = GENESIS_LINES[lineIdx];
+        const scrollX = ((t * 3 + lineOff * 120) % (COLS * 3));
+        let drawCol = -scrollX;
+        for (let i = 0; i < line.length && drawCol < COLS; i++, drawCol++) {
+          if (drawCol >= 0) {
+            const ch = line[i];
+            const bri = lineOff === 0 ? 60 : 35;
+            const hue = lineOff === 0 ? 170 : 160;
+            ctx.fillStyle = `hsl(${hue}, 35%, ${bri}%)`;
+            ctx.fillText(ch, ox + drawCol * CW + CW / 2, oy + (genesisRow + lineOff) * CH);
+          }
+        }
+      }
+      // Also scatter genesis bytes into the L5 hex columns
+      for (const ds of dataSpecs) {
+        if (ds.col % 3 === 0) continue; // only some columns
+        const offset = (t * ds.speed * 1.5 + ds.col * 7) % (GENESIS_LINES.length * 4);
+        const glIdx = Math.floor(offset / 4) % GENESIS_LINES.length;
+        const gl = GENESIS_LINES[glIdx];
+        const charInLine = Math.floor((offset % 4) * 14 + 10 + (ds.col % 5) * 2);
+        if (charInLine < gl.length) {
+          const rr = Math.floor((t * 5 + ds.col) % ROWS);
+          ctx.fillStyle = `hsl(155, 40%, 55%)`;
+          ctx.fillText(gl[charInLine], ox + ds.col * CW + CW / 2, oy + rr * CH);
         }
       }
 
