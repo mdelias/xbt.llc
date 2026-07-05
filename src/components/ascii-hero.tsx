@@ -231,27 +231,7 @@ export function AsciiHero() {
         }
       }
 
-      // L7: Bitcoin genesis block hex dump — scrolling ticker at bottom rows
-      const genesisRow = 22;
-      const genesisSpeed = 2.0;
-      const genesisOffset = Math.floor((t * genesisSpeed) % GENESIS_LINES.length);
-      // Show 2 genesis lines scrolling horizontally
-      for (let lineOff = 0; lineOff < 2; lineOff++) {
-        const lineIdx = (genesisOffset + lineOff) % GENESIS_LINES.length;
-        const line = GENESIS_LINES[lineIdx];
-        const scrollX = ((t * 3 + lineOff * 120) % (COLS * 3));
-        let drawCol = -scrollX;
-        for (let i = 0; i < line.length && drawCol < COLS; i++, drawCol++) {
-          if (drawCol >= 0) {
-            const ch = line[i];
-            const bri = lineOff === 0 ? 60 : 35;
-            const hue = lineOff === 0 ? 170 : 160;
-            ctx.fillStyle = `hsl(${hue}, 35%, ${bri}%)`;
-            ctx.fillText(ch, ox + drawCol * CW + CW / 2, oy + (genesisRow + lineOff) * CH);
-          }
-        }
-      }
-      // Also scatter genesis bytes into the L5 hex columns
+      // L7: Genesis block bytes scattered into hex columns
       for (const ds of dataSpecs) {
         if (ds.col % 3 === 0) continue; // only some columns
         const offset = (t * ds.speed * 1.5 + ds.col * 7) % (GENESIS_LINES.length * 4);
