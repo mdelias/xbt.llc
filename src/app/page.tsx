@@ -1,32 +1,39 @@
+import { AsciiHero } from '@/components/ascii-hero';
+
 export default function Home() {
   return (
     <>
       {/* hero */}
-      <section className="flex flex-col items-center px-4 py-20 text-center sm:py-28">
-        <h1 className="text-4xl font-light tracking-tighter sm:text-5xl">
-          Law built for{' '}
-          <strong className="bg-gradient-to-r from-[var(--accent-light)] to-purple-400 bg-clip-text font-semibold text-transparent">
-            digital assets
-          </strong>
-        </h1>
-        <p className="mt-4 max-w-lg text-sm leading-relaxed text-[var(--muted)] sm:text-base">
-          Regulatory strategy, corporate formation, securities compliance, and
-          litigation defense at the intersection of law and blockchain
-          technology.
-        </p>
-        <div className="mt-8 flex gap-3">
-          <a
-            href="/contact"
-            className="rounded bg-[var(--accent-bg)] px-5 py-2.5 text-xs font-medium text-[var(--accent-light)] transition-colors hover:bg-[var(--accent)] hover:text-white"
-          >
-            Schedule a consultation
-          </a>
-          <a
-            href="/services"
-            className="rounded border border-[var(--border)] px-5 py-2.5 text-xs font-medium text-[var(--muted)] transition-colors hover:border-[var(--subtle)] hover:text-[var(--foreground)]"
-          >
-            View services
-          </a>
+      <section className="relative flex flex-col items-center overflow-hidden px-4 py-20 text-center sm:py-28">
+        <div className="absolute inset-0">
+          <AsciiHero />
+        </div>
+        <div className="relative z-10">
+          <h1 className="text-4xl font-normal tracking-tighter sm:text-5xl">
+            Law built for{' '}
+            <strong className="bg-gradient-to-r from-[var(--accent-light)] to-purple-400 bg-clip-text font-semibold text-transparent">
+              digital assets
+            </strong>
+          </h1>
+          <p className="mt-4 max-w-lg text-sm leading-relaxed text-[var(--muted)] sm:text-base">
+            Regulatory strategy, corporate formation, securities compliance, and
+            litigation defense at the intersection of law and blockchain
+            technology.
+          </p>
+          <div className="mt-8 flex gap-3">
+            <a
+              href="/contact"
+              className="rounded bg-[var(--accent-bg)] px-5 py-2.5 text-xs font-medium text-[var(--accent-light)] transition-colors hover:bg-[var(--accent)] hover:text-white"
+            >
+              Schedule a consultation
+            </a>
+            <a
+              href="/services"
+              className="rounded border border-[var(--border)] px-5 py-2.5 text-xs font-medium text-[var(--muted)] transition-colors hover:border-[var(--subtle)] hover:text-[var(--foreground)]"
+            >
+              View services
+            </a>
+          </div>
         </div>
       </section>
 
