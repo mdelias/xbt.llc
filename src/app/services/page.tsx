@@ -4,6 +4,17 @@ export const metadata: Metadata = {
   title: 'Services',
   description:
     'Legal counsel across the full lifecycle of digital asset ventures — from formation through enforcement defense.',
+  openGraph: {
+    title: 'Services — XBT Legal',
+    description:
+      'Legal counsel across the full lifecycle of digital asset ventures — from formation through enforcement defense.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Services — XBT Legal',
+    description:
+      'Legal counsel across the full lifecycle of digital asset ventures — from formation through enforcement defense.',
+  },
 };
 
 const services = [

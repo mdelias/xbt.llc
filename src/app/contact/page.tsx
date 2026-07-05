@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 const fields = [
   { name: 'name', type: 'text', label: 'Name' },
@@ -9,7 +9,8 @@ const fields = [
 ] as const;
 
 export default function ContactPage() {
-  const [sent, setSent] = useState(false);
+  const [sent, setSent] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const statusRef = useRef<HTMLDivElement>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -17,6 +18,7 @@ export default function ContactPage() {
     const data = new FormData(form);
     const body = Object.fromEntries(data.entries());
 
+    setSent('sending');
     // ponytail: Formspree-style POST, swap endpoint when real backend exists
     const res = await fetch('/api/contact', {
       method: 'POST',
@@ -25,9 +27,18 @@ export default function ContactPage() {
     });
 
     if (res.ok) {
-      setSent(true);
+      setSent('sent');
       form.reset();
+    } else {
+      setSent('error');
     }
+  }
+
+  function statusMsg(): string | null {
+    if (sent === 'sending') return 'Sending inquiry…';
+    if (sent === 'sent') return 'Sent ✓';
+    if (sent === 'error') return 'Failed to send. Try again later.';
+    return null;
   }
 
   return (
@@ -42,33 +53,48 @@ export default function ContactPage() {
 
       <div className="mt-10 grid gap-10 sm:grid-cols-2">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          {fields.map((f) => (
-            <input
-              key={f.name}
-              type={f.type}
-              name={f.name}
-              placeholder={f.label}
-              required
-              minLength={2}
-              className="rounded border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--foreground)] placeholder:text-[var(--subtle)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
-            />
-          ))}
-          <textarea
-            name="message"
-            placeholder="How can we help?"
-            required
-            minLength={10}
-            rows={5}
-            className="resize-y rounded border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--foreground)] placeholder:text-[var(--subtle)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
-          />
-          <button
-            type="submit"
-            disabled={sent}
-            className="self-start rounded bg-[var(--accent-bg)] px-5 py-2.5 text-xs font-medium text-[var(--accent-light)] transition-colors hover:bg-[var(--accent)] hover:text-white disabled:opacity-50"
-          >
-            {sent ? 'Sent ✓' : 'Send inquiry'}
-          </button>
-        </form>
+                  {fields.map((f) => (
+                    <label key={f.name} className="flex flex-col gap-1">
+                      <span className="text-xs text-[var(--foreground)]">{f.label}</span>
+                      <input
+                        type={f.type}
+                        name={f.name}
+                        placeholder={f.label}
+                        required
+                        minLength={2}
+                        className="rounded border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--foreground)] placeholder:text-[var(--subtle)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
+                      />
+                    </label>
+                  ))}
+                  <label className="flex flex-col gap-1">
+                    <span className="text-xs text-[var(--foreground)]">Message</span>
+                    <textarea
+                      name="message"
+                      placeholder="How can we help?"
+                      required
+                      minLength={10}
+                      rows={5}
+                      className="resize-y rounded border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--foreground)] placeholder:text-[var(--subtle)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
+                    />
+                  </label>
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="submit"
+                      disabled={sent !== 'idle'}
+                      className="rounded bg-[var(--accent-bg)] px-5 py-2.5 text-xs font-medium text-[var(--accent-light)] transition-colors hover:bg-[var(--accent)] hover:text-white disabled:opacity-50"
+                    >
+                      Send inquiry
+                    </button>
+                    <div
+                      ref={statusRef}
+                      role="status"
+                      aria-live="polite"
+                      className="text-xs text-[var(--subtle)]"
+                    >
+                      {statusMsg()}
+                    </div>
+                  </div>
+                </form>
 
         <div className="flex flex-col gap-4">
           <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">

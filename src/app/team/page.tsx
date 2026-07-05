@@ -4,6 +4,17 @@ export const metadata: Metadata = {
   title: 'Team',
   description:
     'Direct, experienced counsel at XBT Legal. No layers of associates — every matter receives principal attention.',
+  openGraph: {
+    title: 'Team — XBT Legal',
+    description:
+      'Direct, experienced counsel at XBT Legal. No layers of associates — every matter receives principal attention.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Team — XBT Legal',
+    description:
+      'Direct, experienced counsel at XBT Legal. No layers of associates — every matter receives principal attention.',
+  },
 };
 
 export default function TeamPage() {
@@ -18,7 +29,7 @@ export default function TeamPage() {
 
       <div className="mt-10 grid gap-10 sm:grid-cols-2">
         <div>
-          <div className="mb-3 aspect-square w-full rounded-lg bg-[var(--surface)] flex items-center justify-center text-[10px] text-[var(--subtle)]">
+          <div aria-hidden="true" className="mb-3 aspect-square w-full rounded-lg bg-[var(--surface)] flex items-center justify-center text-[10px] text-[var(--subtle)]">
             photo
           </div>
           <h3 className="text-base font-medium text-[var(--foreground)]">
@@ -34,7 +45,7 @@ export default function TeamPage() {
           </p>
         </div>
         <div>
-          <div className="mb-3 aspect-square w-full rounded-lg bg-[var(--surface)] flex items-center justify-center text-[10px] text-[var(--subtle)]">
+          <div aria-hidden="true" className="mb-3 aspect-square w-full rounded-lg bg-[var(--surface)] flex items-center justify-center text-[10px] text-[var(--subtle)]">
             photo
           </div>
           <h3 className="text-base font-medium text-[var(--foreground)]">

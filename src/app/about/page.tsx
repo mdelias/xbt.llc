@@ -4,6 +4,17 @@ export const metadata: Metadata = {
   title: 'About',
   description:
     'Wyoming-licensed attorney Matthew Elias — digital asset regulation, securities law, and corporate structuring.',
+  openGraph: {
+    title: 'About — XBT Legal',
+    description:
+      'Wyoming-licensed attorney Matthew Elias — digital asset regulation, securities law, and corporate structuring.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About — XBT Legal',
+    description:
+      'Wyoming-licensed attorney Matthew Elias — digital asset regulation, securities law, and corporate structuring.',
+  },
 };
 
 export default function AboutPage() {

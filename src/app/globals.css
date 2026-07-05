@@ -4,7 +4,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-muted: #999;
-  --color-subtle: #666;
+  --color-subtle: #808080;
   --color-surface: #111;
   --color-border: #222;
   --color-accent: #2a6a9c;
@@ -24,7 +24,7 @@
   --background: #fafafa;
   --foreground: #1a1a1a;
   --muted: #666;
-  --subtle: #888;
+  --subtle: #707070;
   --surface: #f0f0f0;
   --border: #ddd;
   --accent: #3a8acc;
@@ -35,4 +35,9 @@
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
