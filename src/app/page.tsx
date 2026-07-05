@@ -8,12 +8,14 @@ export default function Home() {
         <div className="absolute inset-0">
           <AsciiHero />
         </div>
+        {/* backdrop that gives text a clean reading surface over the ASCII */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-[5] mx-auto h-72 max-w-xl bg-gradient-to-b from-[var(--background)] via-[var(--background)]/60 to-transparent sm:h-80" />
         <div className="relative z-10">
-          <h1 className="text-4xl font-normal tracking-tighter sm:text-5xl">
+          <h1 className="text-4xl font-semibold tracking-tight text-[var(--foreground)] sm:text-5xl">
             Law built for{' '}
-            <strong className="bg-gradient-to-r from-[var(--accent-light)] to-purple-400 bg-clip-text font-semibold text-transparent">
+            <span className="bg-gradient-to-r from-[var(--accent-light)] to-[var(--accent)] bg-clip-text font-bold text-transparent">
               digital assets
-            </strong>
+            </span>
           </h1>
           <p className="mt-4 max-w-lg text-sm leading-relaxed text-[var(--muted)] sm:text-base">
             Regulatory strategy, corporate formation, securities compliance, and
@@ -23,7 +25,7 @@ export default function Home() {
           <div className="mt-8 flex gap-3">
             <a
               href="/contact"
-              className="rounded bg-[var(--accent-bg)] px-5 py-2.5 text-xs font-medium text-[var(--accent-light)] transition-colors hover:bg-[var(--accent)] hover:text-white"
+              className="rounded bg-[var(--accent)] px-5 py-2.5 text-xs font-semibold text-white shadow-sm shadow-[var(--accent)]/30 transition-all hover:brightness-110"
             >
               Schedule a consultation
             </a>
