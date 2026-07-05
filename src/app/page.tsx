@@ -9,15 +9,15 @@ export default function Home() {
           <AsciiHero />
         </div>
         {/* solid backdrop behind text for readability over ASCII */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-[5] mx-auto h-80 w-full max-w-2xl rounded-b-3xl bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a]/90 to-[#0a0a0a]/0" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-[5] mx-auto h-80 w-full max-w-2xl rounded-b-3xl bg-gradient-to-b from-[#050508] via-[#050508]/95 to-[#050508]/0" />
         <div className="relative z-10">
-          <h1 className="text-4xl font-bold tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] sm:text-5xl">
+          <h1 className="text-4xl font-bold tracking-tight text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] sm:text-5xl">
             Law built for{' '}
-            <span className="bg-gradient-to-br from-[#7fc1ff] via-[#4a9eff] to-[#2a6a9c] bg-clip-text font-extrabold text-transparent drop-shadow-[0_1px_4px_rgba(0,100,200,0.5)]">
+            <span className="bg-gradient-to-br from-[#5af0ff] via-[#4a9eff] to-[#3a7acc] bg-clip-text font-extrabold text-transparent drop-shadow-[0_2px_8px_rgba(0,80,200,0.6)]">
               digital assets
             </span>
           </h1>
-          <p className="mt-5 max-w-lg text-sm leading-relaxed text-[#bbb] drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)] sm:text-base">
+          <p className="mt-5 max-w-lg text-sm leading-relaxed text-[#ccc] drop-shadow-[0_2px_6px_rgba(0,0,0,0.7)] sm:text-base">
             Regulatory strategy, corporate formation, securities compliance, and
             litigation defense at the intersection of law and blockchain
             technology.
