@@ -21,7 +21,7 @@ export function AsciiHero() {
     if (!ctx) return;
 
     let aid: number, start = performance.now();
-    const COLS = 80, ROWS = 24, CW = 12, CH = 18;
+    const COLS = 68, ROWS = 20, CW = 14, CH = 22;
 
     // Persistent mempool state
     let txs: Tx[] = [];
@@ -89,7 +89,7 @@ export function AsciiHero() {
 
       const grW = COLS * CW, grH = ROWS * CH;
       const ox = Math.floor((w - grW) / 2), oy = Math.floor((h - grH) / 2);
-      ctx.font = '11px monospace';
+      ctx.font = '14px monospace';
       ctx.textBaseline = 'top'; ctx.textAlign = 'center';
 
       // Update mempool state
