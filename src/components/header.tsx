@@ -26,7 +26,7 @@ export function Header() {
           href="/"
           className="text-sm font-semibold tracking-tight text-[var(--foreground)]"
         >
-          XBT<span className="text-[var(--muted)]">Legal</span>
+          XBT<span className="text-[var(--muted)]">LLC</span>
         </Link>
         <div className="hidden items-center gap-6 sm:flex">
           {links.map((l) => (
