@@ -20,11 +20,11 @@ export function AsciiHero() {
     const ctx = cv.getContext('2d');
     if (!ctx) return;
 
-    let aid: number, start = performance.now();
+    let aid: number; const start = performance.now();
     const COLS = 68, ROWS = 20, CW = 14, CH = 22;
 
     // Persistent mempool state
-    let txs: Tx[] = [];
+    const txs: Tx[] = [];
     let blockCount = 0;
     let mempoolSize = 0;
 
@@ -150,7 +150,7 @@ export function AsciiHero() {
         const feeBucket = Math.floor(tx.fee * 5);
         const bright = Math.floor(35 + tx.fee * 50 + (confirmed ? 0 : Math.sin(t * 3 + tx.x) * 8));
         const satStr = `${Math.floor(tx.fee * 400 + 1)}`;
-        let ch = BLK[Math.min(4, feeBucket + 1)];
+        const ch = BLK[Math.min(4, feeBucket + 1)];
         let color: string;
 
         if (confirmed) {
